@@ -2,9 +2,9 @@
 
 - **Название команды:** IT-Спецназ
 - **Состав команды и роли:**
-  1. Канагатов Денис Алмасович – Team Lead.
-  2. Азмагулов Ринат Маликович – ML Engineer / Backend Developer.
-  3. Петрусенко Роман Васильевич – Frontend Developer / QA Engineer.
+  - Канагатов Денис Алмасович – Team Lead.
+  - Азмагулов Ринат Маликович – ML Engineer / Backend Developer.
+  - Петрусенко Роман Васильевич – Frontend Developer / QA Engineer.
 - **Контакты тимлида:**
     - ФИО: Канагатов Денис Алмасович
     - Telegram: @Kanagatov_Denis
