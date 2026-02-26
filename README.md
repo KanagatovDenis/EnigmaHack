@@ -1,87 +1,36 @@
-## 1. Информация о команде
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-- **Название команды:** IT-Спецназ 
-- **Состав команды и роли:**
-  - Канагатов Денис Алмасович – Team Lead.
-  - Азмагулов Ринат Маликович – ML Engineer / Backend Developer.
-  - Петрусенко Роман Васильевич – Frontend Developer / QA Engineer.
-- **Контакты тимлида:**
-    - ФИО: Канагатов Денис Алмасович
-    - Telegram: @Kanagatov_Denis
+## Getting Started
 
----
+First, run the development server:
 
-## 2. Ссылка на репозиторий
-
-- **Ссылка на GitHub:** [тык](https://github.com/KanagatovDenis/EnigmaHack)
-
----
-
-## 3. Идея реализации
-
-
-#### 3.1. Пользовательский путь
-
-Мы представляем следующий сценарий работы оператора технической поддержки с системой:
-
-1.  **Получение письма:** На почту техподдержки приходит новое обращение от клиента.
-2.  **Автоматическая обработка:**
-    - Система автоматически забирает письмо по IMAP.
-    - Агент анализирует текст: определяет тему, категорию проблемы, извлекает суть запроса.
-3.  **Поиск в базе знаний:** AI-агент ищет в базе данных наиболее релевантные предыдущие решения и статьи.
-4.  **Заполнение веб-таблицы:**
-    - Новая запись автоматически появляется в таблице на сайте для оператора.
-    - В записи отображаются тема письма, отправитель, краткое содержание, предложенный агентом проект ответа и статус «Требует проверки».
-5.  **Работа оператора:**
-    - Оператор заходит на сайт, видит обновленную таблицу.
-    - Оператор открывает запись, просматривает предложенный агентом ответ.
-    - При необходимости текст ответа редактируется.
-    - Нажимает кнопку «Подтвердить».
-6.  **Отправка ответа:**
-    - Сервис отправляет утвержденный ответ клиенту по SMTP.
-    - Статус записи в таблице меняется на «Отвечено», фиксируются дата и время ответа.
-
-#### 3.2. Архитектура системы
-
-```mermaid
-graph LR
-    subgraph "Внешняя среда"
-        A[Почтовый сервер]
-        B[Оператор / Браузер]
-    end
-
-    subgraph "Наше приложение"
-        direction TB
-        C[Email Module<br/>IMAP/SMTP]
-        D[Message Broker<br/>RabbitMQ]
-        E[AI Agent Module<br/>Hugging Face]
-        F[Backend API<br/>FastAPI]
-        G[(PostgreSQL DB)]
-        H[Frontend<br/>React/Next.js]
-    end
-
-    A -- Получение писем --> C
-    C -- Новое письмо --> D
-    D -- Текст письма --> E
-    E -- Анализ + Проект ответа --> G
-    E -- Результат --> D
-    D -- Готовые данные --> F
-    F -- Данные для таблицы --> G
-    H -- Запросы API --> F
-    F -- CRUD --> G
-    B -- Взаимодействие --> H
-    F -- Ответ для отправки --> C
-    C -- Отправка ответа --> A
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
----
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## 4. Анализ рисков
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-| Риск | Описание | План минимизации |
-| :--- | :--- | :--- |
-| **Сложность интеграции AI-моделей** | Тонкая настройка модели под специфику писем может занять много времени. | Использовать готовые, хорошо зарекомендовавшие себя модели. |
-| **Качество генерации ответов** | AI может галлюцинировать. | Всегда оставлять финальное утверждение за оператором. |
-| **Безопасность почтового аккаунта** | Хранение паролей от почтового ящика в коде или открытом виде. | Использовать переменные окружения для всех секретов. |
-| **Отсутствие размеченных данных** | Для обучения модели классификации нужны размеченные примеры писем. | Начать с подхода по ключевым словам, параллельно собирать разметку от операторов. |
-| **Интеграция с почтовым сервером** | Разные почтовые сервисы могут иметь особенности работы по IMAP/SMTP. | Использовать проверенные библиотеки. |
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
